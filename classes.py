@@ -3,6 +3,7 @@ import random
 import time
 from functions import computers_pick
 # Functions
+# Removed super() init
 
 def random_number(i):
 	"""
@@ -78,7 +79,6 @@ def intro():
 	print("...")
 	time.sleep(1)
 	computer = computers_pick()
-	print("Computer selected: " + computer.name + "!") 
 	print("Compiling fighters.")
 	time.sleep(1)
 	print("...")
@@ -91,27 +91,13 @@ class Fighter():
 	Base class for all fighters
 	"""
 	def __init__(self):
-		self.hitpoints = 100
-		self.stamina = 50
 		"""
 		Initialize the fighter
 		"""
+		self.hitpoints = 100
+		self.stamina = 50
 		print("Fighter Initialized")
 		
-
-	def hits(i):
-		"""
-		Checks hits and reduces hitpoint
-		"""
-		self.hits -= i
-
-	def stam(i):
-		"""
-		Reduces stamina from weapon hit or
-		special move.
-		"""
-		self.stamina -= i
-
 class Hobo(Fighter):
 	"""
 	Initializes a hobo class
@@ -123,8 +109,6 @@ class Hobo(Fighter):
 		super().__init__()
 		self.name = "The Hobo"
 		
-
-
 class Gladiator(Fighter):
 	"""
 	Initializes a Gladiator class
@@ -137,6 +121,7 @@ class Gladiator(Fighter):
 		super().__init__()
 		self.name = "The Gladiator"
 		
+		
 	
 
 
@@ -147,8 +132,7 @@ class Elf(Fighter):
 	def __init__(self):
 		super().__init__()
 		self.name ="The Elf"
-
-
+		
 class Game:
 	"""
 	A class that begins the game loop
@@ -241,6 +225,16 @@ class Game:
 				print("Player One Wins!")
 			else:
 				print("Error")
+			#As long as the while loop runs the variables remain changed, once the while loop breaks its over. Lets change that
+			self.computer.hitpoints = comp_health
+			self.player.hitpoints = player_health
+			self.comp_fight()
+	def comp_fight(self):
+		print("Second method initialised")
+		print("Please god the variables saved!")
+		print("Computer played as " + self.computer.name)
+		print("Player has " + str(self.player.hitpoints) + " hitpoints!")
+		print("Computer has " + str(self.computer.hitpoints) + " hitpoints!")
 		
 
 
@@ -248,3 +242,4 @@ class Game:
 # Game recognize game
 game = Game()
 game.fight()
+print("Thanks for playing")
