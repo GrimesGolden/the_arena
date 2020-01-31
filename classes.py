@@ -12,6 +12,15 @@ def random_number(i):
 	for x in range(1):
 		return (random.randint(1, i))
 
+def sleepy_time():
+	"""
+	Sleeps for 1 second
+	Simulates loading
+	"""
+	time.sleep(1)
+	print("...")
+
+
 def computers_pick():
 	"""Randomly selects the computers fighter"""
 	x = random_number(3)
@@ -145,14 +154,97 @@ class Game:
 	A class that begins the game loop
 	"""
 	def __init__ (self):
+		"""
+		Select fighters and run intro
+		"""
 		instructions()
 		self.player = players_pick()
 		self.computer = intro()
+		welcome = "Player One picked " + self.player.name + "\nComputer picked " + self.computer.name
+		print(welcome)
+
+	def fight(self):
+		i = input("Press any key to begin!\nOr Q to exit.")
+		if i == 'Q':
+			print("Goodbye!")
+		else:
+			comp_health = self.computer.hitpoints
+			player_health = self.player.hitpoints
+			player_stamina = self.player.stamina
+			draw_weapon = 1
+			while comp_health >= 0 and player_health >= 0:
+				move = input("Enter your move: ")
+				if move == "P":
+					x = random_number(15)
+					if x > 10:
+						time.sleep(1)
+						print("...")
+						time.sleep(1)
+						print("Critical Hit!")
+						print("You crit Computer for " + str(x) + " points ")
+						comp_health -= x
+						print("Computer has " + str(comp_health) + " hit points")
+					else:
+						print("You punch Computer for " + str(x) + " points ")
+						comp_health -= x
+						print("Computer has " + str(comp_health) + " hit points")
+				elif move == "K":
+					x = random_number(15)
+					if x > 10:
+						print("Critical Hit!")
+						print("You crit Computer for " + str(x) + " points ")
+						comp_health -= x
+						print("Computer has " + str(comp_health) + " hit points")
+					else:
+						print("You kick Computer for " + str(x) + " points ")
+						comp_health -= x
+						print("Computer has " + str(comp_health) + " hit points")
+				elif move  == "W":
+					"""
+					Weapon Loop
+					"""
+					draw_weapon -= 1
+					if draw_weapon == 0:
+						print("You draw your weapon!, ruthless onslaught unlocked.")
+					if draw_weapon <= 0:
+						x = random_number(25)
+						if player_stamina < 10:
+							print("You are too exhausted to use your weapon!!")
+						elif x > 20:
+							print("A savage crit!")
+							print("You crit Computer for " + str(x) + " points ")
+							comp_health -= x
+							print("Computer has " + str(comp_health) + " hit points")
+							print("Your stamina reduced by 10")
+							player_stamina -= 10
+							print(str(player_stamina) + " stamina left.")
+						else:
+							print("You attack Computer for " + str(x) + " points ")
+							comp_health -= x
+							print("Computer has " + str(comp_health) + " hit points")
+							print("Your stamina reduced by 10")
+							player_stamina -= 10
+							print(str(player_stamina) + " stamina left.")
+				elif move == "Q":
+					instruction()
+				elif move == "Q":
+					print('Bye have a wonderful time')
+					break
+				else:
+					print("Incorrect Input")
+					print("Press H for instructions")
+			print("Game Over\n")
+			sleepy_time()
+			if comp_health > player_health:
+				print("Computer Wins!")
+			elif comp_health < player_health:
+				print("Player One Wins!")
+			else:
+				print("Error")
 		
+
 
 
 # Game recognize game
 game = Game()
-print("It worked if hitpoints print below, congrats and github upload")
-print(game.computer.hitpoints)
-print(game.player.hitpoints)
+game.fight()
