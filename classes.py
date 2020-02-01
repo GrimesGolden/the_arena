@@ -1,10 +1,9 @@
 # Classes go here.
 import random
 import time
-from functions import computers_pick
-# Functions
-# Removed super() init
 
+
+#FUNCTIONS
 def random_number(i):
 	"""
 	Generates a random number
@@ -37,7 +36,7 @@ def players_pick():
 	"""
 	Selects the players fighter
 	"""
-	print("Select your fighter:\n")
+	print("||SELECT FIGHTER NOW||:\n")
 	print("For Hobo with a Slingshot || enter: A ||\nFor Gladiator || type B ||\nFor the Elf || type C")
 	letter = ""
 	while letter != "A" or "B" or "C":
@@ -59,14 +58,17 @@ def instructions():
 	"""
 	Prints instructions
 	"""
-	print("Welcome to the Arena. A Product of \'Grimes Golden\' Software\n")
+	print("||Welcome to the Arena||\n")
+	sleepy_time()
+	print("||2020 Grimes Golden Software||")
+	sleepy_time()
+	print("||INSTRUCTIONS||")
+	print("Every fighter begins with 100 hit points and 50 stamina.\n")
+	print("One use of the \'Special Move\' unlocked when below 50 hitpoints\n")
+	print("Your fighter will die when below 0 hit points.\n")
+	print("||Press P to punch||\n||K to kick||\n||W for weapon (takes 10 stamina)||\n||S for a special move||\n||or Q to quit||")
 	time.sleep(1)
-	print("Every fighter will begin with 100 hit points and 50 stamina.\n")
-	print("One use of the \'Special Move\' is unlocked when your fighter is below 50 hitpoints\n")
-	print("Your fighter will die if they reach 0 hit points.\n")
-	print("Press P for punch, K for kick, W for weapon (takes 10 stamina), Spacebar to block, S for special move, or Q to quit.")
-	time.sleep(1)
-	print("Type H at any time to see these instructions again.\n")
+	print("\n||Type H at any time to see these instructions again||\n")
 
 def intro():
 	"""
@@ -86,6 +88,7 @@ def intro():
 	return computer
 
 
+#CLASSES
 class Fighter():
 	"""
 	Base class for all fighters
@@ -173,7 +176,7 @@ class Game:
 						comp_health -= x
 						print("Computer has " + str(comp_health) + " hit points")
 						self.comp_fight()
-						player_health = self.player.hitpoints # I have to put this here to make the variable change. # Yeah that fixed it, ducktape mode. 
+						player_health = self.player.hitpoints 
 					else:
 						print("You punch Computer for " + str(x) + " points ")
 						comp_health -= x
@@ -187,29 +190,35 @@ class Game:
 						print("You crit Computer for " + str(x) + " points ")
 						comp_health -= x
 						print("Computer has " + str(comp_health) + " hit points")
+						self.comp_fight()
+						player_health = self.player.hitpoints
 					else:
 						print("You kick Computer for " + str(x) + " points ")
 						comp_health -= x
 						print("Computer has " + str(comp_health) + " hit points")
+						self.comp_fight()
+						player_health = self.player.hitpoints
 				elif move  == "W":
 					"""
 					Weapon Loop
 					"""
 					draw_weapon -= 1
 					if draw_weapon == 0:
-						print("You draw your weapon!, ruthless onslaught unlocked.")
+						print("You draw your weapon!, ruthless onslaught unlocked.\n")
+						sleepy_time()
 					if draw_weapon <= 0:
 						x = random_number(25)
 						if player_stamina < 10:
 							print("You are too exhausted to use your weapon!!")
 						elif x > 20:
-							print("A savage crit!")
 							print("You crit Computer for " + str(x) + " points ")
 							comp_health -= x
 							print("Computer has " + str(comp_health) + " hit points")
 							print("Your stamina reduced by 10")
 							player_stamina -= 10
 							print(str(player_stamina) + " stamina left.")
+							self.comp_fight()
+							player_health = self.player.hitpoints
 						else:
 							print("You attack Computer for " + str(x) + " points ")
 							comp_health -= x
@@ -217,20 +226,24 @@ class Game:
 							print("Your stamina reduced by 10")
 							player_stamina -= 10
 							print(str(player_stamina) + " stamina left.")
+							self.comp_fight()
+							player_health = self.player.hitpoints
 				elif move == "H":
 					instructions()
 				elif move == "Q":
-					print('Bye have a wonderful time')
+					print('||QUIT ENTERED||')
+					sleepy_time()
+					print("||EXITING||")
 					break
 				else:
-					print("Incorrect Input")
+					print("||INCORRECT INPUT||\n")
 					print("Press H for instructions")
-			print("Game Over\n")
+			print("||GAME OVER||\n")
 			sleepy_time()
 			if comp_health > player_health:
-				print("Computer Wins!")
+				print("||COMPUTER WINS||")
 			elif comp_health < player_health:
-				print("Player One Wins!")
+				print("||PLAYER ONE WINS")
 			else:
 				print("Error")
 			#As long as the while loop runs the variables remain changed, once the while loop breaks its over. Lets change that
@@ -248,7 +261,7 @@ class Game:
 		draw_weapon = 1
 		comps_move = random_number(3)
 		if comps_move == 1:
-			x = random_number(50)
+			x = random_number(15)
 			if x > 10:
 				sleepy_time()
 				print("Critical Hit!")
@@ -266,7 +279,7 @@ class Game:
 				print("Player 1 has " + str(player_health) + " hit points")
 				self.player.hitpoints = player_health
 		elif comps_move == 2:
-			x = random_number(50)
+			x = random_number(15)
 			if x > 10:
 				sleepy_time()
 				print("Critical Hit!")
@@ -274,6 +287,7 @@ class Game:
 				player_health -= x
 				sleepy_time()
 				print("Player 1 has " + str(player_health) + " hit points")
+				self.player.hitpoints = player_health
 			else:
 				sleepy_time()
 				print("Computer kicks player one for " + str(x) + " points ")
@@ -282,12 +296,19 @@ class Game:
 				print("Player 1 has " + str(player_health) + " hit points")
 				self.player.hitpoints = player_health
 		elif comps_move  == 3:
-			x = random_number(50)
-			print("Computer fucks you the fuck up dude!\n")
-			player_health -= x
-			sleepy_time()
-			print("Player 1 has " + str(player_health) + " hit points")
-			self.player.hitpoints = player_health
+			x = random_number(25)
+			if comp_stamina > 10:
+				if x > 25:
+					print("CRITICAL HIT!")
+				print("Computer attacks for " + str(x) + " damage.")
+				player_health -= x
+				sleepy_time()
+				print("Player 1 has " + str(player_health) + " hit points")
+				comp_stamina -= 10
+				comp_stamina = self.computer.stamina
+				self.player.hitpoints = player_health
+			elif comp_stamina < 10:
+				self.comp_fight()
 		else:
 			print("Incorrect Input")
 
@@ -296,7 +317,7 @@ class Game:
 
 
 
-# Game recognize game
+# RUNNING GAME
 game = Game()
 game.fight()
 print("Thanks for playing")
