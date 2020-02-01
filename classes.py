@@ -148,6 +148,10 @@ class Game:
 		print(welcome)
 
 	def fight(self):
+		"""
+		Functional Player One
+		Fight Loop
+		"""
 		i = input("Press any key to begin!\nOr Q to exit.")
 		if i == 'Q':
 			print("Goodbye!")
@@ -168,10 +172,14 @@ class Game:
 						print("You crit Computer for " + str(x) + " points ")
 						comp_health -= x
 						print("Computer has " + str(comp_health) + " hit points")
+						self.comp_fight()
+						player_health = self.player.hitpoints # I have to put this here to make the variable change. # Yeah that fixed it, ducktape mode. 
 					else:
 						print("You punch Computer for " + str(x) + " points ")
 						comp_health -= x
 						print("Computer has " + str(comp_health) + " hit points")
+						self.comp_fight()
+						player_health = self.player.hitpoints
 				elif move == "K":
 					x = random_number(15)
 					if x > 10:
@@ -209,8 +217,8 @@ class Game:
 							print("Your stamina reduced by 10")
 							player_stamina -= 10
 							print(str(player_stamina) + " stamina left.")
-				elif move == "Q":
-					instruction()
+				elif move == "H":
+					instructions()
 				elif move == "Q":
 					print('Bye have a wonderful time')
 					break
@@ -228,13 +236,62 @@ class Game:
 			#As long as the while loop runs the variables remain changed, once the while loop breaks its over. Lets change that
 			self.computer.hitpoints = comp_health
 			self.player.hitpoints = player_health
-			self.comp_fight()
+
 	def comp_fight(self):
-		print("Second method initialised")
-		print("Please god the variables saved!")
-		print("Computer played as " + self.computer.name)
-		print("Player has " + str(self.player.hitpoints) + " hitpoints!")
-		print("Computer has " + str(self.computer.hitpoints) + " hitpoints!")
+		"""
+		Computers turn
+		Beta Mode
+		"""
+		comp_health = self.computer.hitpoints
+		player_health = self.player.hitpoints
+		comp_stamina = self.computer.stamina
+		draw_weapon = 1
+		comps_move = random_number(3)
+		if comps_move == 1:
+			x = random_number(50)
+			if x > 10:
+				sleepy_time()
+				print("Critical Hit!")
+				print("Computer critically hits player one  for " + str(x) + " points ")
+				player_health -= x
+				sleepy_time()
+				print("Player 1 has " + str(player_health) + " hit points")
+				self.player.hitpoints = player_health
+			else:
+				sleepy_time()
+				print("Computer punches player one for " + str(x) + " points ")
+				sleepy_time()
+				player_health -= x
+				sleepy_time()
+				print("Player 1 has " + str(player_health) + " hit points")
+				self.player.hitpoints = player_health
+		elif comps_move == 2:
+			x = random_number(50)
+			if x > 10:
+				sleepy_time()
+				print("Critical Hit!")
+				print("Computer critically hits player one for " + str(x) + " points ")
+				player_health -= x
+				sleepy_time()
+				print("Player 1 has " + str(player_health) + " hit points")
+			else:
+				sleepy_time()
+				print("Computer kicks player one for " + str(x) + " points ")
+				player_health -= x
+				sleepy_time()
+				print("Player 1 has " + str(player_health) + " hit points")
+				self.player.hitpoints = player_health
+		elif comps_move  == 3:
+			x = random_number(50)
+			print("Computer fucks you the fuck up dude!\n")
+			player_health -= x
+			sleepy_time()
+			print("Player 1 has " + str(player_health) + " hit points")
+			self.player.hitpoints = player_health
+		else:
+			print("Incorrect Input")
+
+
 		
 
 
