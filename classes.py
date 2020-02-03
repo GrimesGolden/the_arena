@@ -1,6 +1,7 @@
 
 import random
 import time
+# Is this a pokemon clone? Pretty sure it is at this point. 
 # Functions
 
 def random_number(i):
@@ -60,7 +61,6 @@ def instructions():
 	print("Welcome to the Arena. A Product of \'Grimes Golden\' Software\n")
 	time.sleep(1)
 	print("Every fighter will begin with 100 hit points and 50 stamina.\n")
-	print("One use of the \'Special Move\' is unlocked when your fighter is below 50 hitpoints\n")
 	print("Your fighter will die if they reach 0 hit points.\n")
 	print("Press P for punch, K for kick, W for weapon (takes 10 stamina), S for special move, or Q to quit.")
 	time.sleep(1)
@@ -107,6 +107,20 @@ class Hobo(Fighter):
 		"""
 		super().__init__()
 		self.name = "The Hobo"
+		self.weapon = "Slingshot"
+
+	def special_move(self, i):
+		player_health = i
+		print("The hobo pulls out a 40oz of King Cobra\n")
+		print("AND STARTS CHUGGING!!\n")
+		x = random_number(12)
+		print("It heals Hobo for " + str(x) +" hitpoints!")
+		if x > 6:
+			print("||SUPER EFFECTIVE||")
+		player_health += x
+		print("Player One has " + str(player_health) + " hitpoints.")
+		return player_health
+
 		
 class Gladiator(Fighter):
 	"""
@@ -119,11 +133,11 @@ class Gladiator(Fighter):
 		"""
 		super().__init__()
 		self.name = "The Gladiator"
-		
-		
-	
+		self.weapon = "Gladius"
 
-
+	def special_move(self):
+		print("Special Move...Coming soon.")
+		
 class Elf(Fighter):
 	"""
 	Initializes an Elf class
@@ -131,7 +145,10 @@ class Elf(Fighter):
 	def __init__(self):
 		super().__init__()
 		self.name ="The Elf"
-		
+		self.weapon = "Bow"
+	
+	def special_move(self):
+		print("Special move, coming to a code near you!")
 class Game:
 	"""
 	A class that begins the game loop
@@ -193,7 +210,7 @@ class Game:
 				"""
 				draw_weapon -= 1
 				if draw_weapon == 0:
-					print("You draw your weapon!, ruthless onslaught unlocked.\n")
+					print("You draw your " + self.player.weapon + "! Ruthless onslaught unlocked.\n")
 					sleepy_time()
 				if draw_weapon <= 0:
 					x = random_number(2)
@@ -209,7 +226,7 @@ class Game:
 					player_health = self.player.hitpoints
 					game.comp_fight()
 				else:
-					print("You attack Computer for " + str(x) + " points \n")
+					print("You attack with " + self.player.weapon + " for" + str(x) + " points \n")
 					comp_health -= x
 					print("Computer has " + str(comp_health) + " hit points")
 					print("Your stamina reduced by 10\n")
@@ -217,6 +234,13 @@ class Game:
 					print(str(player_stamina) + " stamina left.")
 					player_health = self.player.hitpoints
 					game.comp_fight()
+			elif move == "S":
+				player_health = self.player.hitpoints
+				self.player.hitpoints = self.player.special_move(player_health)
+				#If it doesnt work the problems in the other function
+				player_health = self.player.hitpoints
+				game.comp_fight()
+
 			elif move == "H":
 				instructions()
 			elif move == "Q":
@@ -298,13 +322,13 @@ class Game:
 				self.player.hitpoints = player_health
 		elif comps_move  == 3:
 			x = random_number(25)
-			print("Computer draws weapon!\n")
+			print("Computer draws " + self.computer.weapon + "!\n" )
 			if comp_stamina < 10:
 				print("But they are out of stamina\n")
 			if comp_stamina > 10:
 				player_health -= x
 				sleepy_time()
-				print("Weapon strike for " + str(x) + " hitpoints.")
+				print(self.computer.weapon + " strike for " + str(x) + " hitpoints.")
 				sleepy_time()
 				print("Player 1 has " + str(player_health) + " hit points")
 				comp_stamina -= 10
