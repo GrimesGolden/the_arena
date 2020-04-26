@@ -1,29 +1,43 @@
 import java.util.Random;
+import java.lang.Thread;
 // Class requires random.
 
 public class Hobo extends Fighter
 // Initializes a hobo class inheriting from fighter.
 {	
-	String name = "The Hobo";
-	String weapon = "Slingshot";
+	private String name = "The Hobo";
+	private String weapon = "Slingshot";
+	private int special = 3;
 
-	public void specialMove()
+	public void specialMove() throws InterruptedException
 	{	
-		Random randomNumber = new Random();
-		int playerHealth = this.getHitpoints(); // Thank god for the this statement ayy boys?
-		System.out.println("The hobo pulls out 40oz of King Cobra\n");
-		System.out.println("AND STARTS CHUGGING!!\n");
-		int x = randomNumber.nextInt(12) + 1;
-		String healing = "It heals Hobo for " + x + " hitpoints!";
-		System.out.println(healing);
-		if (x > 6)
+		if (special > 0)
 		{
-			System.out.println("||IT'S SUPER EFFECTIVE||");
+			Random randomNumber = new Random();
+			System.out.println(this.getName() + " pulls out 40oz of King Cobra\n");
+			System.out.println("AND STARTS CHUGGING!!\n");
+			int x = randomNumber.nextInt(12) + 1;
+			String healing = "It heals " + this.getName() + " for " + x + " hitpoints!\n";
+			System.out.println(healing);
+
+			if (x > 6)
+			{
+				System.out.println("||IT'S SUPER EFFECTIVE||");
+			}
+
+			this.incHitpoints(x);
+			String statement = "||" + this.getName() + "s hitpoints:  " + this.getHitpoints() + " ||\n";
+			System.out.println(statement);
+			special--;
+			Thread.sleep(1000);
 		}
 
-		this.incHitpoints(x);
-		String statement = "Player One has " + playerHealth + " hitpoints.";
-		System.out.println(statement);
+		if (special == 0)
+		{
+			System.out.println(this.getName() + " is out of malt liquor!!");
+			Thread.sleep(1000);
+		}
+		
 	}
 
 	public String getName()
@@ -32,10 +46,22 @@ public class Hobo extends Fighter
 		return name;
 	}
 
+	public int getSpecial()
+	// Return number of special moves left.
+	{
+		return special;
+	}
+
 	public String getWeapon()
 	{
 		// Getter method for weapon variable/
 		return weapon;
+	}
+
+	public void setName(String name)
+	{
+		//Set name variable
+		this.name = name;
 	}
 
 

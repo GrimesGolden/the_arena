@@ -1,11 +1,13 @@
 public class Elf extends Fighter
 {
-	String name = "The Elf";
-	String weapon = "Bow";
+	private String name = "The Elf";
+	private String weapon = "Bow";
+	private int special = 3;
 
-	public void specialMove()
+	public void specialMove() throws InterruptedException
 	{
 		System.out.println("Special move, coming to a code near you");
+		special--;
 	}
 
 	public String getName()
@@ -14,9 +16,21 @@ public class Elf extends Fighter
 		return name;
 	}
 
+	public void setName(String name)
+	{
+		//Set name variable
+		this.name = name;
+	}
+
 	public String getWeapon()
 	{
 		// Getter method for weapon variable/
 		return weapon;
+	}
+
+	public int getSpecial()
+	// Return number of special moves left.
+	{
+		return special;
 	}
 }

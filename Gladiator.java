@@ -1,11 +1,15 @@
 public class Gladiator extends Fighter
 {
-	String name = "The Gladiator";
-	String weapon = "Gladius";
+	private String name = "The Gladiator";
+	private String weapon = "Gladius";
+	private int special = 3;
 
-	public void specialMove()
+
+	public void specialMove() throws InterruptedException
 	{
-		System.out.println("Special Move...Coming soon");
+		System.out.println("Special Move Activated\n");
+		special--;
+		
 	}
 
 	public String getName()
@@ -19,4 +23,17 @@ public class Gladiator extends Fighter
 		// Getter method for weapon variable/
 		return weapon;
 	}
+
+	public void setName(String name)
+	{
+		//Set name variable
+		this.name = name;
+	}
+
+	public int getSpecial()
+	// Return number of special moves left.
+	{
+		return special;
+	}
+
 }
