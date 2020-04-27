@@ -77,4 +77,5 @@ public class Fighter
 	{
 		System.out.println("Special move, coming soon");
 	}
+
 }

@@ -4,13 +4,23 @@ import java.lang.Thread;
 //For use in Thread.sleep(), don't forget it throws interrupted.
 
 public class Game
-{	static Fighter player;
-	static Fighter computer;
+{	 static Fighter player;
+	 static Fighter computer;
 
 	public static void main(String[] args) throws InterruptedException
 	{
 		Game.gameLoop();
 	} // End main method, need to design computers turn. 
+
+	public static Fighter getPlayer()
+	{
+		return player;
+	}
+
+	public static Fighter getComputer()
+	{
+		return computer;
+	}
 
 	public static Fighter computers_pick()
 	{

@@ -32,7 +32,7 @@ public class Hobo extends Fighter
 			Thread.sleep(1000);
 		}
 
-		if (special == 0)
+		if (special <= 0)
 		{
 			System.out.println(this.getName() + " is out of malt liquor!!");
 			Thread.sleep(1000);
@@ -64,5 +64,6 @@ public class Hobo extends Fighter
 		this.name = name;
 	}
 
-
 }
+
+

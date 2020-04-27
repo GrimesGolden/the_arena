@@ -1,9 +1,11 @@
+import java.util.Random;
+import java.lang.Thread;
+
 public class Gladiator extends Fighter
 {
 	private String name = "The Gladiator";
 	private String weapon = "Gladius";
 	private int special = 3;
-
 
 	public void specialMove() throws InterruptedException
 	{
@@ -35,5 +37,6 @@ public class Gladiator extends Fighter
 	{
 		return special;
 	}
-
+	
 }
+
