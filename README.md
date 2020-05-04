@@ -8,10 +8,8 @@ Choose from a variety of powerful special moves!!
 
 Use ruthless weapon tactics to take down your opponent!
 
-Play as drunken hobo!!!
+Play as a drunken hobo!!!
 
-Presenting over 400 lines of lazily repeated if loops!!
-No wonder our programmers can't get hired outside of developing countries!!
 
 All this and more is coming
 May 2020
