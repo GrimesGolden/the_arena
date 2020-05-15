@@ -25,7 +25,7 @@ public class Game
 	public static Fighter computers_pick()
 	{
 		Random randomNumber = new Random();
-		int x = randomNumber.nextInt(3);
+		int x = randomNumber.nextInt(4);
 
 		Fighter computer;
 
@@ -39,6 +39,10 @@ public class Game
 			computer = new Hobo();
 		}
 
+		else if (x == 2)
+		{
+			computer = new Spider();
+		}
 		else
 		// There must be an else here, otherwise the compiler will complain.
 		{
@@ -51,8 +55,8 @@ public class Game
 	public static Fighter players_pick()
 	{	Scanner kb = new Scanner(System.in); // Creating scanner object.
 		System.out.println("Select your fighter:\n");
-		System.out.println("For Hobo with a Slingshot || enter: A ||"
-			+ "\nFor Gladiator || type B ||\nFor the Elf || type C");
+		System.out.println("For Hobo with a Slingshot || enter: A ||\n"
+			+ "For Gladiator || type B ||\nFor the Elf || type C\nFor Spider || type D\n");
 		String letter = "";
 		Fighter player = new Fighter(); // I intialized this first because java compiler needs it declared. keep an eye on this however, it could cause errors due to a blank fighter. 
 
@@ -75,9 +79,14 @@ public class Game
 				player = new Elf();
 				break;
 			}
+			else if (letter.equals("D"))
+			{
+				player = new Spider();
+				break;
+			}
 			else
 			{
-				System.out.println("Incorrect input\nChoices are A, B or C: ");
+				System.out.println("Incorrect input\nChoices are A, B, C or D: ");
 			}
 		}
 
@@ -135,7 +144,8 @@ public class Game
 		int draw_weapon = 1;
 		Random randomNumber = new Random();
 		int comps_move = randomNumber.nextInt(4);
-
+		computer.checkEffect();
+		
 		if (computer.getSpecial() <= 0)
 		// This simulates a human decision to not use your special move if you are out of counters. 
 		{
@@ -202,7 +212,7 @@ public class Game
 
 		else if (comps_move == 2)
 		{
-			int x = randomNumber.nextInt(45);
+			int x = randomNumber.nextInt(30);
 
 			String wepMessage = "Computer draws " + computer.getWeapon() + "!\n";
 			System.out.println(wepMessage);
@@ -229,7 +239,7 @@ public class Game
 			computer.specialMove();
 		}
 
-		System.out.println("------------------------Your Turn-------------------------");
+		System.out.println("------------------------Players Turn---------------------------");
 
 	}
 
@@ -244,7 +254,8 @@ public class Game
 		int draw_weapon = 1;
 		// Commence main loop.
 		while(player.getHitpoints() > 0 && computer.getHitpoints() > 0)
-		{
+		{	
+			player.checkEffect();
 			System.out.println("Enter your move: \n");
 			String move = kb.nextLine(); 
 			switch (move) {
@@ -313,7 +324,7 @@ public class Game
 				case "W":
 					// Weapon loop
 					draw_weapon -= 1;
-					x = randomNumber.nextInt(30);
+					x = randomNumber.nextInt(16);
 					if (draw_weapon == 0)
 					{
 						String drawMessage = "You draw your " + player.getWeapon() + "!\n";

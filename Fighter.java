@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Fighter
 {
 	// Initializes a fighter with hitpoints and stamina.
@@ -6,6 +8,8 @@ public class Fighter
 	private String name = "The fighter"; // Try to overload this, as the name must be specific to the subclass. We may have to make this a method and overload it. Make it a getter method, and overload.  
 	private String weapon = "Override me";
 	private int special = 3; // Used for special move counter. 
+	private int burn = 0; 
+	private int poison = 0;
 
 	public Fighter()
 	// Upon creation of fighter instance, fighter initialized prints.
@@ -73,9 +77,65 @@ public class Fighter
 		return weapon;
 	}
 
+
+	public int getBurn()
+	{
+		return burn;
+	}
+
+	public int getPoison()
+	{
+		return poison;
+	}
+
+	public void incBurn(int i)
+	{
+		burn += i;
+	}
+
+	public void incPoison(int i)
+	{
+		poison += i;
+	}
+
+	public void decBurn(int i)
+	{
+		burn -= i;
+	}
+
+	public void decPoison(int i)
+	{
+		poison -= i;
+	}
+
+	public void checkEffect() throws InterruptedException
+	{
+		// Checks player for environmental effect
+		Random randomNumber = new Random();
+		int x = randomNumber.nextInt(16);
+		if (this.getBurn() > 0)
+		{
+			String message = this.getName() + " burned for " + x + " damage!";
+			System.out.println(message);
+			this.decHitpoints(x);
+			this.decBurn(1);
+			Thread.sleep(1000);
+		}
+
+		if (this.getPoison() > 0)
+		{
+			String message = this.getName() + " is poisoned for " + x + " damage, the venom courses!";
+			System.out.println(message);
+			this.decHitpoints(x);
+			this.decPoison(1);
+			Thread.sleep(1000);
+		}
+	}
+
 	public void specialMove() throws InterruptedException
+	// Will be overidden
 	{
 		System.out.println("Special move, coming soon");
 	}
-
+	
 }
