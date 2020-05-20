@@ -34,12 +34,19 @@ public class Elf extends Fighter
 				System.out.println("Roasted for " + y + " damage!");
 				System.out.println();
 				Game.computer.decHitpoints(y);
+				Game.computer.incBurn(3);
 			}
 
 			else
 			{
-				System.out.println("Computer roasted for " + x + " damage!");
+				System.out.println("Computer hit for " + x + " damage!");
 				Game.computer.decHitpoints(x);
+
+				if (x > 10) // Then the player critted
+				{
+					System.out.println("Computer was engulfed in flame!");
+					Game.computer.incBurn(3);
+				}
 			} // End else
 		} // End players if
 
@@ -59,12 +66,19 @@ public class Elf extends Fighter
 				System.out.println("Roasted for " + y + " damage!");
 				System.out.println();
 				Game.player.decHitpoints(y);
+				Game.player.incBurn(3);
 			}
 
 			else
 			{
-				System.out.println("Player roasted for " + x + " damage!");
+				System.out.println("Player hit for " + x + " damage!");
 				Game.player.decHitpoints(x);
+
+				if (x > 10) // Then the computer critted
+				{
+					System.out.println("Player was engulfed in flame!");
+					Game.player.incBurn(3);
+				}
 			}
 		} // End computers if.
 

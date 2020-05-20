@@ -114,9 +114,11 @@ public class Fighter
 		Random randomNumber = new Random();
 		int x = randomNumber.nextInt(16);
 		if (this.getBurn() > 0)
-		{
-			String message = this.getName() + " burned for " + x + " damage!";
+		{	
+			String message1 = this.getName() + " is on fire! ";
+			String message = this.getName() + " burned for " + x + " damage!!";
 			System.out.println(message);
+			System.out.println(message1);
 			this.decHitpoints(x);
 			this.decBurn(1);
 			Thread.sleep(1000);

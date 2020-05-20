@@ -141,20 +141,26 @@ public class Game
 	public static void computers_turn() throws InterruptedException
 	// Allows the computer to attack in it's own enclosed loop. 
 	{
-		int draw_weapon = 1;
+		int draw_weapon = 1; // One chance to draw weapon.
 		Random randomNumber = new Random();
-		int comps_move = randomNumber.nextInt(4);
-		computer.checkEffect();
+		int comps_move = randomNumber.nextInt(4); // Random number between 0 and 4
+		computer.checkEffect(); // Check effect method
 		
-		if (computer.getSpecial() <= 0)
+		if (computer.getSpecial() <= 0 && computer.getHitpoints() > 0)
 		// This simulates a human decision to not use your special move if you are out of counters. 
 		{
 			comps_move = randomNumber.nextInt(3);
 		}
+
+		if (computer.getStamina() <= 0 && computer.getHitpoints() > 0)
+		// This simulates a human decision to not use your weapon if you are out of stamina. 
+		{
+			comps_move = randomNumber.nextInt(2);
+		}
 	
 		System.out.println("------------------------Computers Turn-------------------------");
 
-		if (comps_move == 0)
+		if (comps_move == 0 && computer.getHitpoints() > 0)
 		{
 			int x = randomNumber.nextInt(25);
 			if (x > 10)
@@ -182,7 +188,7 @@ public class Game
 			}
 		}
 
-		else if (comps_move == 1)
+		else if (comps_move == 1 && computer.getHitpoints() > 0)
 		{
 			int x = randomNumber.nextInt(25);
 			if (x > 10)
@@ -210,7 +216,7 @@ public class Game
 			}
 		}
 
-		else if (comps_move == 2)
+		else if (comps_move == 2 && computer.getHitpoints() > 0)
 		{
 			int x = randomNumber.nextInt(30);
 
@@ -234,7 +240,7 @@ public class Game
 			}
 		}
 
-		else if (comps_move == 3 && computer.getSpecial() > 0)
+		else if (comps_move == 3 && computer.getSpecial() > 0 && computer.getHitpoints() > 0)
 		{
 			computer.specialMove();
 		}

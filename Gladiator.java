@@ -20,7 +20,7 @@ public class Gladiator extends Fighter
 		if (this.getName().equals("Player") && this.getSpecial() > 0)
 			// If this turn is  a player turn.
 		{
-			if (Game.computer.getHitpoints() < 25)
+			if (Game.computer.getHitpoints() < 50)
 			{
 				if (x == 0)
 				{
@@ -30,7 +30,6 @@ public class Gladiator extends Fighter
 					Thread.sleep(1000);
 					System.out.println("Thumbs down, FINISH HIM!");
 					Game.computer.decHitpoints(100);
-					System.out.println("In desperation Computer mounts a final attack!!!");
 				}
 
 				else if (x > 0)
@@ -41,7 +40,7 @@ public class Gladiator extends Fighter
 				}
 			}
 
-			else if (Game.computer.getHitpoints() > 25)
+			else if (Game.computer.getHitpoints() > 50)
 			{
 				System.out.println("The emperor does not deign to  intevene, Computers hitpoints are too great.");
 			}
@@ -52,7 +51,7 @@ public class Gladiator extends Fighter
 		if (this.getName().equals("Computer") && this.getSpecial() > 0)
 		{
 			// If this turn is  a Computer turn.
-			if (Game.player.getHitpoints() < 25)
+			if (Game.player.getHitpoints() < 50)
 			{
 				if (x == 0)
 				{
@@ -76,7 +75,7 @@ public class Gladiator extends Fighter
 				}
 			}
 
-			else if (Game.player.getHitpoints() > 25)
+			else if (Game.player.getHitpoints() > 50)
 			{
 				System.out.println("The emperor does not deign to  intevene, Players hitpoints are too great.");
 			}
