@@ -56,7 +56,7 @@ public class Game
 	{	Scanner kb = new Scanner(System.in); // Creating scanner object.
 		System.out.println("Select your fighter:\n");
 		System.out.println("For Hobo with a Slingshot || enter: A ||\n"
-			+ "For Gladiator || type B ||\nFor the Elf || type C\nFor Spider || type D\n");
+			+ "For Gladiator || type B ||\nFor Elf || type C\nFor Spider || type D\n");
 		String letter = "";
 		Fighter player = new Fighter(); // I intialized this first because java compiler needs it declared. keep an eye on this however, it could cause errors due to a blank fighter. 
 
@@ -98,10 +98,10 @@ public class Game
 	public static void instructions() throws InterruptedException
 	{
 		// Prints a series of instructions for the user.
-		System.out.println("Welcome to the Arena. A Product of \'Grimes Golden\' Software\n");
+		System.out.println("Welcome to the Arena.\n");
 		Thread.sleep(2000);
-		System.out.println("Every fighter will begin with 100 hit points and 50 stamina.\n");
-		System.out.println("Your fighter will die if they reach 0 hit points.\n");
+		System.out.println("Each fighter will begin with 100 hit points and 50 stamina.\n");
+		System.out.println("Fighter will die if they reach 0 hit points.\n");
 		System.out.println("Press P for punch, K for kick, W for weapon (takes 10 stamina), S for special move, or Q to quit.");
 		Thread.sleep(2000);
 		System.out.println("Type H at any time to see these instructions again.\n");
@@ -160,14 +160,14 @@ public class Game
 	
 		System.out.println("------------------------Computers Turn-------------------------");
 
-		if (comps_move == 0 && computer.getHitpoints() > 0)
+		if (comps_move == 0 && computer.getHitpoints() > 0) // Always checks to see if computers hitpoints are greater than 0. 
 		{
-			int x = randomNumber.nextInt(25);
-			if (x > 10)
+			int x = randomNumber.nextInt(10) + 10;
+			if (x > 15)
 			{
 				Thread.sleep(1000);
 				System.out.println("Critical Hit!");
-				String messageDisplay = "Computer critically hits player one  for " + x + " points ";
+				String messageDisplay = "Computer critically punches player one  for " + x + " points ";
 				Thread.sleep(1000);
 				System.out.println(messageDisplay);
 				player.decHitpoints(x);
@@ -190,12 +190,12 @@ public class Game
 
 		else if (comps_move == 1 && computer.getHitpoints() > 0)
 		{
-			int x = randomNumber.nextInt(25);
-			if (x > 10)
+			int x = randomNumber.nextInt(10) + 10;
+			if (x > 15)
 			{
 				Thread.sleep(1000);
 				System.out.println("Critical Hit!");
-				String messageDisplay = "Computer critically hits player one  for " + x + " points \n";
+				String messageDisplay = "Computer critically kicks player one  for " + x + " points \n";
 				System.out.println(messageDisplay);
 				Thread.sleep(1000);
 				player.decHitpoints(x);
@@ -218,7 +218,7 @@ public class Game
 
 		else if (comps_move == 2 && computer.getHitpoints() > 0)
 		{
-			int x = randomNumber.nextInt(30);
+			int x = randomNumber.nextInt(15) + 10;
 
 			String wepMessage = "Computer draws " + computer.getWeapon() + "!\n";
 			System.out.println(wepMessage);
@@ -245,6 +245,11 @@ public class Game
 			computer.specialMove();
 		}
 
+		else if (computer.getHitpoints() < 0) // Hitpoints are less than zero, thus computer is dead.
+		{
+			System.out.println(computer.getName() + " dies!");
+		}
+
 		System.out.println("------------------------Players Turn---------------------------");
 
 	}
@@ -266,8 +271,8 @@ public class Game
 			String move = kb.nextLine(); 
 			switch (move) {
 				case "P": 
-					int x = randomNumber.nextInt(16);
-					if (x > 10)
+					int x = randomNumber.nextInt(10) + 10;
+					if (x > 15)
 					{
 						Thread.sleep(1000);
 						System.out.println("...");
@@ -297,8 +302,8 @@ public class Game
 					}
 
 				case "K":
-					x = randomNumber.nextInt(16);
-					if (x > 10)
+					x = randomNumber.nextInt(10) + 10;
+					if (x > 15)
 					{
 						Thread.sleep(1000);
 						System.out.println("...");
@@ -330,7 +335,7 @@ public class Game
 				case "W":
 					// Weapon loop
 					draw_weapon -= 1;
-					x = randomNumber.nextInt(16);
+					x = randomNumber.nextInt(15) + 10;
 					if (draw_weapon == 0)
 					{
 						String drawMessage = "You draw your " + player.getWeapon() + "!\n";
@@ -349,7 +354,7 @@ public class Game
 						break;
 					}
 
-					else if (x > 25)
+					else if (x > 20)
 					{
 						Thread.sleep(1000);
 						System.out.println("...");

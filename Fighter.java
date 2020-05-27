@@ -112,7 +112,7 @@ public class Fighter
 	{
 		// Checks player for environmental effect
 		Random randomNumber = new Random();
-		int x = randomNumber.nextInt(16);
+		int x = randomNumber.nextInt(5) + 5;
 		if (this.getBurn() > 0)
 		{	
 			String message1 = this.getName() + " is on fire! ";

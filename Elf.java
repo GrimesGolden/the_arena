@@ -12,8 +12,8 @@ public class Elf extends Fighter
 
 	{	
 		Random randomNumber = new Random();
-		int x = randomNumber.nextInt(12) + 1;
-		int y = randomNumber.nextInt(20) + 1;
+		int x = randomNumber.nextInt(10) + 10; // Standard damage.
+		int y = randomNumber.nextInt(10) + 15; // Extra damage done to hobo.
 		System.out.println("\n");
 		
 		
@@ -42,7 +42,7 @@ public class Elf extends Fighter
 				System.out.println("Computer hit for " + x + " damage!");
 				Game.computer.decHitpoints(x);
 
-				if (x > 10) // Then the player critted
+				if (x > 15) // Then the player critted
 				{
 					System.out.println("Computer was engulfed in flame!");
 					Game.computer.incBurn(3);
@@ -74,7 +74,7 @@ public class Elf extends Fighter
 				System.out.println("Player hit for " + x + " damage!");
 				Game.player.decHitpoints(x);
 
-				if (x > 10) // Then the computer critted
+				if (x > 15) // Then the computer critted
 				{
 					System.out.println("Player was engulfed in flame!");
 					Game.player.incBurn(3);

@@ -16,7 +16,7 @@ public class Hobo extends Fighter
 			Random randomNumber = new Random();
 			System.out.println(this.getName() + " pulls out 40oz of King Cobra\n");
 			System.out.println("AND STARTS CHUGGING!!\n");
-			int x = randomNumber.nextInt(12) + 1;
+			int x = randomNumber.nextInt(10) + 15;
 			String healing = "It heals " + this.getName() + " for " + x + " hitpoints!\n";
 			System.out.println(healing);
 

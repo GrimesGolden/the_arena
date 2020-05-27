@@ -16,8 +16,8 @@ public class Spider extends Fighter
 		if (special > 0)
 		{
 			Random randomNumber = new Random();
-			int x = randomNumber.nextInt(12) + 1;
-			String message = this.getName() + " shoots venom for " + x + " damage";
+			int x = randomNumber.nextInt(10) + 10;
+			String message = this.getName() + " injects venom for " + x + " damage";
 			System.out.println(message);
 
 			if (this.getName().equals("Computer"))
@@ -30,20 +30,20 @@ public class Spider extends Fighter
 				Game.computer.decHitpoints(x);
 			}
 
-			if (x > 6)
+			if (x > 15)
 			{
 				System.out.println("||IT'S SUPER EFFECTIVE||");
 
 				if (this.getName().equals("Computer"))
 				{
 					System.out.println("Player is poisoned");
-					Game.player.incPoison(2); // Increment the poison counter (inst variable) that will be checked for by the checkEffect() method in Fighter class. 
+					Game.player.incPoison(3); // Increment the poison counter (inst variable) that will be checked for by the checkEffect() method in Fighter class. 
 				}
 
 				if (this.getName().equals("Player"))
 				{
 					System.out.println("Computer is poisoned");
-					Game.computer.incPoison(2);
+					Game.computer.incPoison(3);
 				}
 			}
 		}
